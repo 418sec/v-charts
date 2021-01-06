@@ -1,4 +1,4 @@
-import { getFormated, getStackMap } from '../../utils'
+import { getFormated, getStackMap, encode } from '../../utils'
 import { isArray } from 'utils-lite'
 
 function getLineXAxis (args) {
@@ -123,14 +123,14 @@ function getLineTooltip (args) {
       let tpl = []
       const { name, axisValueLabel } = items[0]
       const title = name || axisValueLabel
-      tpl.push(`${title}<br>`)
+      tpl.push(`${encode(title)}<br>`)
       items.forEach(({ seriesName, data, marker }) => {
         let showData = null
         const type = ~rightList.indexOf(seriesName) ? yAxisType[1] : yAxisType[0]
         const itemData = isArray(data) ? data[1] : data
         showData = getFormated(itemData, type, digit)
         tpl.push(marker)
-        tpl.push(`${seriesName}: ${showData}`)
+        tpl.push(`${encode(seriesName)}: ${encode(showData)}`)
         tpl.push('<br>')
       })
       return tpl.join('')

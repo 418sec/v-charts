@@ -1,4 +1,5 @@
 import { isArray } from 'utils-lite'
+import { encode } from '../../utils'
 
 function getSeries (args) {
   const {
@@ -67,7 +68,7 @@ function getTooltip (args) {
         return tooltipFormatter.apply(null, params)
       }
 
-      return `${name}: ${value}`
+      return `${encode(name)}: ${encode(value)}`
     }
   }
 }

@@ -1,4 +1,4 @@
-import { getFormated } from '../../utils'
+import { getFormated, encode } from '../../utils'
 
 function getWaterfallTooltip (dataType, digit) {
   return {
@@ -7,8 +7,8 @@ function getWaterfallTooltip (dataType, digit) {
     formatter (items) {
       const item = items[1]
       return [
-        `${item.name}<br/>${item.seriesName} :`,
-        `${getFormated(item.value, dataType, digit)}`
+        `${encode(item.name)}<br/>${encode(item.seriesName)} :`,
+        `${encode(getFormated(item.value, dataType, digit))}`
       ].join('')
     }
   }

@@ -1,5 +1,5 @@
 import { itemPoint } from '../../constants'
-import { getFormated } from '../../utils'
+import { getFormated, encode } from '../../utils'
 
 function getRadarLegend (rows, dimension, legendName) {
   let legendData = rows.map(row => row[dimension])
@@ -23,10 +23,10 @@ function getRadarTooltip (dataType, radar, digit) {
     formatter (item) {
       const tpl = []
       tpl.push(itemPoint(item.color))
-      tpl.push(`${item.name}<br />`)
+      tpl.push(`${encode(item.name)}<br />`)
       item.data.value.forEach((val, index) => {
-        tpl.push(`${nameTemp[index]}: `)
-        tpl.push(`${getFormated(val, typeTemp[index], digit)}<br />`)
+        tpl.push(`${encode(nameTemp[index])}: `)
+        tpl.push(`${encode(getFormated(val, typeTemp[index], digit))}<br />`)
       })
       return tpl.join('')
     }

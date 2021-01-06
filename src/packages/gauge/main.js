@@ -1,4 +1,4 @@
-import { getFormated } from '../../utils'
+import { getFormated, encode } from '../../utils'
 import { isObject } from 'utils-lite'
 
 function getTooltip (args) {
@@ -16,8 +16,8 @@ function getTooltip (args) {
         return tooltipFormatter.apply(null, arguments)
       }
       const tpl = []
-      tpl.push(`${seriesName}: `)
-      tpl.push(`${getFormated(value, dataType[seriesName], digit)} ${name}`)
+      tpl.push(`${encode(seriesName)}: `)
+      tpl.push(`${encode(getFormated(value, dataType[seriesName], digit))} ${encode(name)}`)
       return tpl.join('')
     }
   }

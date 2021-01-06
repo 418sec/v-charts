@@ -4,7 +4,8 @@ import {
 } from 'utils-lite'
 
 import {
-  getFormated
+  getFormated,
+  encode
 } from '../../utils'
 
 function getTooltip (args) {
@@ -26,7 +27,7 @@ function getTooltip (args) {
       }
 
       return [
-        `${seriesName}: `,
+        `${encode(seriesName)}: `,
         getFormated(value, dataType, digit)
       ].join('')
     }

@@ -1,5 +1,5 @@
 import { itemPoint } from '../../constants'
-import { getFormated } from '../../utils'
+import { getFormated, encode } from '../../utils'
 
 function getFunnelTooltip (dataType, digit) {
   return {
@@ -7,7 +7,7 @@ function getFunnelTooltip (dataType, digit) {
     formatter (item) {
       let tpl = []
       tpl.push(itemPoint(item.color))
-      tpl.push(`${item.name}: ${getFormated(item.data.realValue, dataType, digit)}`)
+      tpl.push(`${encode(item.name)}: ${encode(getFormated(item.data.realValue, dataType, digit))}`)
       return tpl.join('')
     }
   }

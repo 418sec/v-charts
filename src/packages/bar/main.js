@@ -1,5 +1,5 @@
 import { itemPoint } from '../../constants'
-import { getFormated, getStackMap } from '../../utils'
+import { getFormated, getStackMap, encode } from '../../utils'
 import { set, get, cloneDeep } from 'utils-lite'
 // default opacity of bar while dim-axis type is 'value'
 const VALUE_AXIS_OPACITY = 0.5
@@ -87,14 +87,14 @@ function getBarTooltip (args) {
     trigger: 'axis',
     formatter (items) {
       let tpl = []
-      tpl.push(`${items[0].name}<br>`)
+      tpl.push(`${encode(items[0].name)}<br>`)
       items.forEach(item => {
         const seriesName = item.seriesName
         const type = ~secondAxis.indexOf(seriesName)
           ? meaAxisType[1]
           : meaAxisType[0]
         tpl.push(itemPoint(item.color))
-        tpl.push(`${seriesName}: `)
+        tpl.push(`${encode(seriesName)}: `)
         tpl.push(getFormated(item.value, type, digit))
         tpl.push('<br>')
       })
