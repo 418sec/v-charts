@@ -1,4 +1,4 @@
-import { getFormated } from '../../utils'
+import { getFormated, encode } from '../../utils'
 import { itemPoint } from '../../constants'
 
 function getTooltip (args) {
@@ -13,11 +13,11 @@ function getTooltip (args) {
       const tpl = []
       const { name, data, value, color } = item
       tpl.push(itemPoint(color))
-      tpl.push(`${name} : `)
+      tpl.push(`${encode(name)} : `)
       if (data && data.source) {
-        tpl.push(`${getFormated(value, linksDataType, digit)}<br />`)
+        tpl.push(`${encode(getFormated(value, linksDataType, digit))}<br />`)
       } else {
-        tpl.push(`${getFormated(value, itemDataType, digit)}<br />`)
+        tpl.push(`${encode(getFormated(value, itemDataType, digit))}<br />`)
       }
       return tpl.join('')
     }

@@ -1,5 +1,5 @@
 import { itemPoint, HEAT_MAP_COLOR, HEAT_BMAP_COLOR } from '../../constants'
-import { getBmap, getAmap, getMapJSON, getFormated } from '../../utils'
+import { getBmap, getAmap, getMapJSON, getFormated, encode } from '../../utils'
 import echarts from 'echarts/lib/echarts'
 
 function getAxisList (rows, label) {
@@ -92,7 +92,7 @@ function getTooltip (args) {
     trigger: 'item',
     formatter ({ color, data: { value: [xDim, yDim, value, ...extraData] } }) {
       const tpl = []
-      tpl.push(`${innerXAxisList[xDim]} ~ ${innerYAxisList[yDim]}<br>`)
+      tpl.push(`${encode(innerXAxisList[xDim])} ~ ${encode(innerYAxisList[yDim])}<br>`)
       extraMetrics.forEach((m, index) => {
         tpl.push(`${m}: ${extraData[index]}<br>`)
       })

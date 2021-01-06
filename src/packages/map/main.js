@@ -1,16 +1,16 @@
 import echarts from 'echarts/lib/echarts'
 import { itemPoint } from '../../constants'
-import { getMapJSON, getFormated } from '../../utils'
+import { getMapJSON, getFormated, encode } from '../../utils'
 
 function getTooltip (dataType, digit, dataStore, metrics, color, labelMap) {
   return {
     formatter (item) {
       let tpl = []
       if (!item.name) return ''
-      tpl.push(`${item.name}<br>`)
+      tpl.push(`${encode(item.name)}<br>`)
       metrics.forEach((label, index) => {
         let title = labelMap[label] != null ? labelMap[label] : label
-        tpl.push(`${itemPoint(color[index])} ${title} : `)
+        tpl.push(`${encode(itemPoint(color[index]))} ${encode(title)} : `)
         if (dataStore[item.name]) {
           tpl.push(getFormated(dataStore[item.name][label], dataType[label], digit))
         } else {

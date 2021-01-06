@@ -1,5 +1,5 @@
 import { itemPoint } from '../../constants'
-import { getFormated, setArrayValue } from '../../utils'
+import { getFormated, setArrayValue, encode } from '../../utils'
 import { cloneDeep } from 'utils-lite'
 
 const pieRadius = 100
@@ -79,9 +79,9 @@ function getPieSeries (args) {
           position: rowsTempLength > 1 && index === 0 ? 'inner' : 'outside',
           formatter (item) {
             let tpl = []
-            tpl.push(`${item.name}:`)
+            tpl.push(`${encode(item.name)}:`)
             tpl.push(getFormated(item.value, dataType, digit))
-            tpl.push(`(${item.percent}%)`)
+            tpl.push(`(${encode(item.percent)}%)`)
             return tpl.join(' ')
           }
         }
@@ -161,14 +161,14 @@ function getPieTooltip (args) {
         tpl.push('其他:')
         remainArr.forEach(({ name, value }) => {
           const percent = getFormated((value / sum), 'percent')
-          tpl.push(`<br>${name}:`)
+          tpl.push(`<br>${encode(name)}:`)
           tpl.push(getFormated(value, dataType, digit))
-          tpl.push(`(${percent})`)
+          tpl.push(`(${encode(percent)})`)
         })
       } else {
-        tpl.push(`${item.name}:`)
+        tpl.push(`${encode(item.name)}:`)
         tpl.push(getFormated(item.value, dataType, digit))
-        tpl.push(`(${item.percent}%)`)
+        tpl.push(`(${encode(item.percent)}%)`)
       }
       return tpl.join(' ')
     }

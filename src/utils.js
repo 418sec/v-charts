@@ -1,6 +1,18 @@
 import numerify from 'numerify'
 import { isFunction } from 'utils-lite'
 
+export const encode = (str) => {
+  // https://stackoverflow.com/a/57448862
+  return str.replace(/[&<>'"]/g,
+    tag => ({
+      '&': '&amp;',
+      '<': '&lt;',
+      '>': '&gt;',
+      "'": '&#39;',
+      '"': '&quot;'
+    }[tag]))
+}
+
 export const getFormated = (val, type, digit, defaultVal = '-') => {
   if (isNaN(val)) return defaultVal
   if (!type) return val

@@ -1,5 +1,5 @@
 import { itemPoint } from '../../constants'
-import { getFormated } from '../../utils'
+import { getFormated, encode } from '../../utils'
 import { isArray } from 'utils-lite'
 
 const DEFAULT_MA = [5, 10, 20, 30]
@@ -36,24 +36,24 @@ function getCandleTooltip (args) {
     },
     formatter (options) {
       const tpl = []
-      tpl.push(`${options[0].axisValue}<br>`)
+      tpl.push(`${encode(options[0].axisValue)}<br>`)
       options.forEach(option => {
         const { data, seriesName, componentSubType, color } = option
         const name = labelMap[seriesName] == null ? seriesName : labelMap[seriesName]
-        tpl.push(`${itemPoint(color)} ${name}: `)
+        tpl.push(`${encode(itemPoint(color))} ${encode(name)}: `)
         if (componentSubType === 'candlestick') {
           tpl.push('<br>')
           metrics.slice(0, 4).forEach((m, i) => {
             const name = labelMap[m] != null ? labelMap[m] : m
             const val = getFormated(data[i + 1], dataType, digit)
-            tpl.push(`- ${name}: ${val}<br>`)
+            tpl.push(`- ${encode(name)}: ${encode(val)}<br>`)
           })
         } else if (componentSubType === 'line') {
           const val = getFormated(data, dataType, digit)
-          tpl.push(`${val}<br>`)
+          tpl.push(`${encode(val)}<br>`)
         } else if (componentSubType === 'bar') {
           const val = getFormated(data[1], dataType, digit)
-          tpl.push(`${val}<br>`)
+          tpl.push(`${encode(val)}<br>`)
         }
       })
       return tpl.join('')

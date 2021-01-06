@@ -1,6 +1,6 @@
 import { isArray } from 'utils-lite'
 import { itemPoint } from '../../constants'
-import { getFormated } from '../../utils'
+import { getFormated, encode } from '../../utils'
 import { line } from '../line/main'
 
 function getScatterLegend (dataLabels, legendName) {
@@ -30,11 +30,11 @@ function getTooltipContent (item, args) {
   const { labelMap, columns, dataType, digit } = args
   const tpl = []
   const { color, seriesName, data: { value } } = item
-  tpl.push(`${itemPoint(color)} ${seriesName}<br>`)
+  tpl.push(`${encode(itemPoint(color))} ${encode(seriesName)}<br>`)
   value.forEach((d, i) => {
     const name = labelMap[columns[i]] || columns[i]
     const num = isNaN(d) ? d : getFormated(d, dataType[columns[i]], digit)
-    tpl.push(`${name}: ${num}<br>`)
+    tpl.push(`${encode(name)}: ${encode(num)}<br>`)
   })
   return tpl.join('')
 }
